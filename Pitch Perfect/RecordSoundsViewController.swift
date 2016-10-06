@@ -49,7 +49,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
                 try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
                 try audioRecorder = AVAudioRecorder(url: filePath, settings: [:])
             } catch {
-                fatalError()
+                displayAlertWindow(title: "Recording Error", msg: "Please exit the app and restart", actions: nil)
             }
             audioRecorder.delegate = self
             audioRecorder.isMeteringEnabled = true;
@@ -66,7 +66,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         do {
             try audioSession.setActive(false)
         } catch {
-            //TODO add alert
+            displayAlertWindow(title: "Stop Recording Error", msg: "Please exit the app and restart", actions: nil)
         }
     }
     
@@ -116,5 +116,24 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             stopButton.isHidden = true
         }
     }
+    
+    // MARK: Specialized alert displays for UIViewControllers
+    private func displayAlertWindow(title: String, msg: String, actions: [UIAlertAction]?){
+        DispatchQueue.main.async() { () -> Void in
+            let alertWindow: UIAlertController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
+            alertWindow.addAction(self.dismissAction())
+            if let array = actions {
+                for action in array {
+                    alertWindow.addAction(action)
+                }
+            }
+            self.present(alertWindow, animated: true, completion: nil)
+        }
+    }
+    
+    private func dismissAction()-> UIAlertAction {
+        return UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil)
+    }
+
 }
 
