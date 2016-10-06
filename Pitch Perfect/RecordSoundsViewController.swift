@@ -13,10 +13,10 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     // MARK: Variables
     
-    var audioRecorder:  AVAudioRecorder!
-    var recordedAudio:  RecordedAudio!
-    var audioRecordOn:  Bool!
-    var stopPressed:    Bool!
+    private var audioRecorder:  AVAudioRecorder!
+    private var recordedAudio:  RecordedAudio!
+    private var audioRecordOn:  Bool!
+    private var stopPressed:    Bool!
     
     // MARK: IBOutlet
     
@@ -88,6 +88,16 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "stoppedRecording"){
+            let playSoundsVC:PlaySoundsViewController = segue.destination as! PlaySoundsViewController
+            let data = sender as! RecordedAudio
+            playSoundsVC.receivedAudio = data
+        }
+    }
+    
+    // MARK: AVAudioRecorderDelegate Method
+    
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder!, successfully flag: Bool) {
         if (flag){
             //Save recorded audio
@@ -110,15 +120,5 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             stopButton.isHidden = true
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "stoppedRecording"){
-            let playSoundsVC:PlaySoundsViewController = segue.destination as! PlaySoundsViewController
-            let data = sender as! RecordedAudio
-            playSoundsVC.receivedAudio = data
-        }
-    }
-    
-
 }
 
