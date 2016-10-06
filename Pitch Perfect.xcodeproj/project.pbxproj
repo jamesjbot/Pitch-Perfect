@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A774F7C61DA6679D00F32546 /* app icons in Resources */ = {isa = PBXBuildFile; fileRef = A774F7C51DA6679D00F32546 /* app icons */; };
 		A7D824591B1BCC4200B0EA09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D824581B1BCC4200B0EA09 /* AppDelegate.swift */; };
 		A7D8245B1B1BCC4200B0EA09 /* RecordSoundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D8245A1B1BCC4200B0EA09 /* RecordSoundsViewController.swift */; };
 		A7D8245E1B1BCC4200B0EA09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7D8245C1B1BCC4200B0EA09 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A774F7C51DA6679D00F32546 /* app icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "app icons"; sourceTree = "<group>"; };
 		A7D824531B1BCC4200B0EA09 /* Pitch Perfect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pitch Perfect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7D824571B1BCC4200B0EA09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7D824581B1BCC4200B0EA09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				A7D8245C1B1BCC4200B0EA09 /* Main.storyboard */,
 				A7D824851B1C062200B0EA09 /* RecordedAudio.swift */,
 				A7D8245F1B1BCC4200B0EA09 /* Images.xcassets */,
+				A774F7C51DA6679D00F32546 /* app icons */,
 				A7D824611B1BCC4200B0EA09 /* LaunchScreen.xib */,
 				A7D824561B1BCC4200B0EA09 /* Supporting Files */,
 			);
@@ -207,6 +210,7 @@
 			files = (
 				A7D8245E1B1BCC4200B0EA09 /* Main.storyboard in Resources */,
 				A7D824631B1BCC4200B0EA09 /* LaunchScreen.xib in Resources */,
+				A774F7C61DA6679D00F32546 /* app icons in Resources */,
 				A7D8247D1B1BE70C00B0EA09 /* movie_quote.mp3 in Resources */,
 				A7D824601B1BCC4200B0EA09 /* Images.xcassets in Resources */,
 			);
