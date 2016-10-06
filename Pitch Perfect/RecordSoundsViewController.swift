@@ -49,14 +49,14 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             recordLabel.text="Recording in Progess"
             stopButton.isHidden=false
             let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-            var currentDateTime = Date()
-            var formatter = DateFormatter()
+            let currentDateTime = Date()
+            let formatter = DateFormatter()
             formatter.dateFormat = "ddMMyyyy-HHmmss"
-            var recordingName = formatter.string(from: currentDateTime)+".wav"
-            var pathArray = [dirPath, recordingName]
+            let recordingName = formatter.string(from: currentDateTime)+".wav"
+            let pathArray = [dirPath, recordingName]
             let filePath : URL = NSURL.fileURL(withPathComponents: pathArray)!
             print(filePath)
-            var session = AVAudioSession.sharedInstance()
+            let session = AVAudioSession.sharedInstance()
             do {
                 try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
                 try audioRecorder = AVAudioRecorder(url: filePath, settings: [:])
