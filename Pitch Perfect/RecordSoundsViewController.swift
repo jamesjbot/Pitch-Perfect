@@ -89,11 +89,10 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         } else {
             print("Recording was not successful")
             recordLabel.text = "Recording Failed, Restart Application"
-            recordButton.isEnabled=false
-            stopButton.isHidden=true
+            recordButton.isEnabled = false
+            stopButton.isHidden = true
         }
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "stoppedRecording"){
