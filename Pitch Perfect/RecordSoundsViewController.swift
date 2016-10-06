@@ -10,32 +10,21 @@ import UIKit
 import AVFoundation
 
 class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
+    
+    // MARK: Variables
+    
     var audioRecorder:  AVAudioRecorder!
     var recordedAudio:  RecordedAudio!
     var audioRecordOn:  Bool!
     var stopPressed:    Bool!
     
+    // MARK: IBOutlet
+    
     @IBOutlet weak var recordLabel: UILabel!
     @IBOutlet weak var stopButton:  UIButton!
     @IBOutlet weak var recordButton:    UIButton!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        audioRecordOn=false
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        stopButton.isHidden=true
-    }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+    // MARK: IBActions
     
     @IBAction func recordAudio(_ sender: UIButton) {
         stopPressed=false
@@ -70,6 +59,34 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         }
     }
     
+    @IBAction func stopRecording(_ sender: UIButton){
+        stopPressed=true
+        recordLabel.text="Tap to Record"
+        audioRecorder.stop()
+        var audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setActive(false)
+        } catch {
+            //TODO add alert
+        }
+    }
+    
+    // MARK: Functions
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        audioRecordOn=false
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        stopButton.isHidden=true
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder!, successfully flag: Bool) {
         if (flag){
@@ -102,18 +119,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         }
     }
     
-    
-    @IBAction func stopRecording(_ sender: UIButton){
-        stopPressed=true
-        recordLabel.text="Tap to Record"
-        audioRecorder.stop()
-        var audioSession = AVAudioSession.sharedInstance()
-        do {
-            try audioSession.setActive(false)
-        } catch {
-            
-        }
-        
-    }
+
 }
 
