@@ -28,12 +28,13 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBAction func recordAudio(_ sender: UIButton) {
         stopPressed = false
-        if (audioRecordOn == true){
-            //If you are already recoding
+        switch audioRecordOn {
+        case true:
             audioRecorder.stop()
             recordButton.isEnabled = true
             audioRecordOn = false
-        } else {
+            break
+        case false:
             audioRecordOn = true
             recordLabel.text = "Recording in Progess"
             stopButton.isHidden = false
@@ -55,6 +56,9 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             audioRecorder.isMeteringEnabled = true;
             audioRecorder.prepareToRecord()
             audioRecorder.record()
+            break
+        default:
+            break
         }
     }
     
