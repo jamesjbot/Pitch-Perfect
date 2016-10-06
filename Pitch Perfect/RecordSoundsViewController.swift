@@ -44,7 +44,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             let recordingName = formatter.string(from: currentDateTime)+".wav"
             let pathArray = [dirPath, recordingName]
             let filePath : URL = NSURL.fileURL(withPathComponents: pathArray)!
-            print(filePath)
             let session = AVAudioSession.sharedInstance()
             do {
                 try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
@@ -104,17 +103,14 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             recordLabel.text = "Tap to Record"
             var stringpath:String! = recorder.url.lastPathComponent
             recordedAudio = RecordedAudio(filePathUrl: recorder.url,title: stringpath)
-            print(recorder.url.lastPathComponent)
             recordButton.isEnabled = true
             audioRecordOn=false
             
             //Move to next scene
             if (stopPressed==true){
                 self.performSegue(withIdentifier: "stoppedRecording", sender: recordedAudio)
-            }
-            
+            }            
         } else {
-            print("Recording was not successful")
             recordLabel.text = "Recording Failed, Restart Application"
             recordButton.isEnabled = false
             stopButton.isHidden = true
