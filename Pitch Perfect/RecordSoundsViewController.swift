@@ -27,16 +27,16 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     // MARK: IBActions
     
     @IBAction func recordAudio(_ sender: UIButton) {
-        stopPressed=false
-        if (audioRecordOn==true){
+        stopPressed = false
+        if (audioRecordOn == true){
             //If you are already recoding
             audioRecorder.stop()
-            recordButton.isEnabled=true
-            audioRecordOn=false
+            recordButton.isEnabled = true
+            audioRecordOn = false
         } else {
             audioRecordOn = true
-            recordLabel.text="Recording in Progess"
-            stopButton.isHidden=false
+            recordLabel.text = "Recording in Progess"
+            stopButton.isHidden = false
             let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
             let currentDateTime = Date()
             let formatter = DateFormatter()
@@ -59,8 +59,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     @IBAction func stopRecording(_ sender: UIButton){
-        stopPressed=true
-        recordLabel.text="Tap to Record"
+        stopPressed = true
+        recordLabel.text = "Tap to Record"
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
         do {
@@ -74,12 +74,11 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        audioRecordOn=false
-        // Do any additional setup after loading the view, typically from a nib.
+        audioRecordOn = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        stopButton.isHidden=true
+        stopButton.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -104,10 +103,10 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             let stringpath:String! = recorder.url.lastPathComponent
             recordedAudio = RecordedAudio(filePathUrl: recorder.url,title: stringpath)
             recordButton.isEnabled = true
-            audioRecordOn=false
+            audioRecordOn = false
             
             //Move to next scene
-            if (stopPressed==true){
+            if (stopPressed == true){
                 self.performSegue(withIdentifier: "stoppedRecording", sender: recordedAudio)
             }            
         } else {
