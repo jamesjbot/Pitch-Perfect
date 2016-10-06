@@ -11,11 +11,14 @@ import AVFoundation
 
 class PlaySoundsViewController: UIViewController {
     
-    var audioPlayer:    AVAudioPlayer!
+    // MARK: Variables
+    
     var receivedAudio:  RecordedAudio!
+    var audioPlayer:    AVAudioPlayer!
     var audioEngine:    AVAudioEngine!
     var audioFile:  AVAudioFile!
     
+    // MARK: IBOutlets
     
     @IBOutlet weak var slowButton: UIButton!
     
@@ -27,31 +30,24 @@ class PlaySoundsViewController: UIViewController {
     
     @IBOutlet weak var darthButton: UIButton!
     
-    @IBOutlet weak var echoButton: UIButton!
-
+    // MARK: Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         do {
             try audioPlayer = AVAudioPlayer (contentsOf: receivedAudio.filePathUrl)
         } catch {
-            fatalError()
+            displayAlertWindow(title: "Player Creation Error", msg: "Please go back and try again", actions: nil)
         }
+        
         audioPlayer.enableRate = true
-
         audioEngine = AVAudioEngine()
+        
         do {
             audioFile = try AVAudioFile(forReading: receivedAudio.filePathUrl)
         } catch {
-            fatalError()
+            displayAlertWindow(title: "Audio File Error", msg: "Please go back and try again", actions: nil)
         }
-    }
-
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
@@ -109,7 +105,7 @@ class PlaySoundsViewController: UIViewController {
         do {
             try audioEngine.start()
         } catch {
-            fatalError()
+            displayAlertWindow(title: "Playing Error", msg: "Please go back and try again", actions: nil)
         }
         
         audioPlayerNode.play()
@@ -122,16 +118,22 @@ class PlaySoundsViewController: UIViewController {
         audioEngine.reset()
     }
     
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: Specialized alert displays for UIViewControllers
+    private func displayAlertWindow(title: String, msg: String, actions: [UIAlertAction]?){
+        DispatchQueue.main.async() { () -> Void in
+            let alertWindow: UIAlertController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
+            alertWindow.addAction(self.dismissAction())
+            if let array = actions {
+                for action in array {
+                    alertWindow.addAction(action)
+                }
+            }
+            self.present(alertWindow, animated: true, completion: nil)
+        }
     }
-    */
+    
+    private func dismissAction()-> UIAlertAction {
+        return UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil)
+    }
 
 }
