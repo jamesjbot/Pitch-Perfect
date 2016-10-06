@@ -62,7 +62,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         stopPressed=true
         recordLabel.text="Tap to Record"
         audioRecorder.stop()
-        var audioSession = AVAudioSession.sharedInstance()
+        let audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.setActive(false)
         } catch {
@@ -97,11 +97,11 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     // MARK: AVAudioRecorderDelegate Method
     
-    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder!, successfully flag: Bool) {
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if (flag){
             //Save recorded audio
             recordLabel.text = "Tap to Record"
-            var stringpath:String! = recorder.url.lastPathComponent
+            let stringpath:String! = recorder.url.lastPathComponent
             recordedAudio = RecordedAudio(filePathUrl: recorder.url,title: stringpath)
             recordButton.isEnabled = true
             audioRecordOn=false
