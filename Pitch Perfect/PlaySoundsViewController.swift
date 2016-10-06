@@ -13,21 +13,17 @@ class PlaySoundsViewController: UIViewController {
     
     // MARK: Variables
     
-    var receivedAudio:  RecordedAudio!
-    var audioPlayer:    AVAudioPlayer!
-    var audioEngine:    AVAudioEngine!
-    var audioFile:  AVAudioFile!
+    internal var receivedAudio:  RecordedAudio!
+    private var audioPlayer:    AVAudioPlayer!
+    private var audioEngine:    AVAudioEngine!
+    private var audioFile:  AVAudioFile!
     
     // MARK: IBOutlets
     
     @IBOutlet weak var slowButton: UIButton!
-    
     @IBOutlet weak var fastButton: UIButton!
-    
     @IBOutlet weak var stopButton: UIButton!
-    
     @IBOutlet weak var chipmunkButton: UIButton!
-    
     @IBOutlet weak var darthButton: UIButton!
     
     // MARK: Functions
@@ -50,45 +46,38 @@ class PlaySoundsViewController: UIViewController {
         }
     }
     
-    
     @IBAction func slowPlay(_ sender: UIButton){
         stopAllAudio()
         playAudioAtSpeed(0.5)
     }
-    
     
     @IBAction func fastPlay(_ sender: UIButton){
         stopAllAudio()
         playAudioAtSpeed(1.5)
     }
     
-    
     @IBAction func stopPlay(_ sender: UIButton){
         stopAllAudio()
     }
-    
     
     @IBAction func chipmunkPlay(_ sender: UIButton){
         stopAllAudio()
         playAudioWithVariablePitch(1000)
     }
     
-    
     @IBAction func darthPlay(_ sender: UIButton){
         stopAllAudio()
         playAudioWithVariablePitch(-1000)
     }
     
-    
-    func playAudioAtSpeed(_ speed: Float){
+    private func playAudioAtSpeed(_ speed: Float){
         audioEngine.reset()
         audioPlayer.rate = speed
         audioPlayer.currentTime = 0.0
         audioPlayer.play()
     }
     
-    
-    func playAudioWithVariablePitch(_ pitch: Float){
+    private func playAudioWithVariablePitch(_ pitch: Float){
         stopAllAudio()
         
         let audioPlayerNode = AVAudioPlayerNode()
@@ -111,8 +100,7 @@ class PlaySoundsViewController: UIViewController {
         audioPlayerNode.play()
     }
     
-
-    func stopAllAudio(){
+    private func stopAllAudio(){
         audioPlayer.stop()
         audioEngine.stop()
         audioEngine.reset()
