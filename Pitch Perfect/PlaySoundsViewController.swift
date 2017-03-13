@@ -14,9 +14,9 @@ class PlaySoundsViewController: UIViewController {
     // MARK: Variables
     
     internal var receivedAudio:  RecordedAudio!
-    private var audioPlayer:    AVAudioPlayer!
-    private var audioEngine:    AVAudioEngine!
-    private var audioFile:  AVAudioFile!
+    fileprivate var audioPlayer:    AVAudioPlayer!
+    fileprivate var audioEngine:    AVAudioEngine!
+    fileprivate var audioFile:  AVAudioFile!
     
     // MARK: IBOutlets
     
@@ -33,7 +33,7 @@ class PlaySoundsViewController: UIViewController {
         do {
             try audioPlayer = AVAudioPlayer (contentsOf: receivedAudio.filePathUrl)
         } catch {
-            displayAlertWindow(title: "Player Creation Error", msg: "Please go back and try again", actions: nil)
+            displayAlertWindow("Player Creation Error", msg: "Please go back and try again", actions: nil)
         }
         
         audioPlayer.enableRate = true
@@ -42,7 +42,7 @@ class PlaySoundsViewController: UIViewController {
         do {
             audioFile = try AVAudioFile(forReading: receivedAudio.filePathUrl)
         } catch {
-            displayAlertWindow(title: "Audio File Error", msg: "Please go back and try again", actions: nil)
+            displayAlertWindow("Audio File Error", msg: "Please go back and try again", actions: nil)
         }
     }
     
@@ -70,14 +70,14 @@ class PlaySoundsViewController: UIViewController {
         playAudioWithVariablePitch(-1000)
     }
     
-    private func playAudioAtSpeed(_ speed: Float){
+    fileprivate func playAudioAtSpeed(_ speed: Float){
         audioEngine.reset()
         audioPlayer.rate = speed
         audioPlayer.currentTime = 0.0
         audioPlayer.play()
     }
     
-    private func playAudioWithVariablePitch(_ pitch: Float){
+    fileprivate func playAudioWithVariablePitch(_ pitch: Float){
         stopAllAudio()
         
         let audioPlayerNode = AVAudioPlayerNode()
@@ -94,20 +94,20 @@ class PlaySoundsViewController: UIViewController {
         do {
             try audioEngine.start()
         } catch {
-            displayAlertWindow(title: "Playing Error", msg: "Please go back and try again", actions: nil)
+            displayAlertWindow("Playing Error", msg: "Please go back and try again", actions: nil)
         }
         
         audioPlayerNode.play()
     }
     
-    private func stopAllAudio(){
+    fileprivate func stopAllAudio(){
         audioPlayer.stop()
         audioEngine.stop()
         audioEngine.reset()
     }
     
     // MARK: Specialized alert displays for UIViewControllers
-    private func displayAlertWindow(title: String, msg: String, actions: [UIAlertAction]?){
+    fileprivate func displayAlertWindow(_ title: String, msg: String, actions: [UIAlertAction]?) {
         DispatchQueue.main.async() { () -> Void in
             let alertWindow: UIAlertController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
             alertWindow.addAction(self.dismissAction())
@@ -120,8 +120,8 @@ class PlaySoundsViewController: UIViewController {
         }
     }
     
-    private func dismissAction()-> UIAlertAction {
-        return UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil)
+    fileprivate func dismissAction()-> UIAlertAction {
+        return UIAlertAction(title: "Dismiss", style: .default, handler: nil)
     }
 
 }
