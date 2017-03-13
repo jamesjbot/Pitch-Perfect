@@ -13,10 +13,10 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     // MARK: Variables
     
-    private var audioRecorder:  AVAudioRecorder!
-    private var recordedAudio:  RecordedAudio!
-    private var audioRecordOn:  Bool!
-    private var stopPressed:    Bool!
+    fileprivate var audioRecorder:  AVAudioRecorder!
+    fileprivate var recordedAudio:  RecordedAudio!
+    fileprivate var audioRecordOn:  Bool!
+    fileprivate var stopPressed:    Bool!
     
     // MARK: IBOutlet
     
@@ -50,7 +50,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
                 try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
                 try audioRecorder = AVAudioRecorder(url: filePath, settings: [:])
             } catch {
-                displayAlertWindow(title: "Recording Error", msg: "Please exit the app and restart", actions: nil)
+                displayAlertWindow("Recording Error", msg: "Please exit the app and restart", actions: nil)
             }
             audioRecorder.delegate = self
             audioRecorder.isMeteringEnabled = true;
@@ -70,7 +70,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         do {
             try audioSession.setActive(false)
         } catch {
-            displayAlertWindow(title: "Stop Recording Error", msg: "Please exit the app and restart", actions: nil)
+            displayAlertWindow("Stop Recording Error", msg: "Please exit the app and restart", actions: nil)
         }
     }
     
@@ -121,7 +121,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     // MARK: Specialized alert displays for UIViewControllers
-    private func displayAlertWindow(title: String, msg: String, actions: [UIAlertAction]?){
+    fileprivate func displayAlertWindow(_ title: String, msg: String, actions: [UIAlertAction]?){
         DispatchQueue.main.async() { () -> Void in
             let alertWindow: UIAlertController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
             alertWindow.addAction(self.dismissAction())
@@ -134,8 +134,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         }
     }
     
-    private func dismissAction()-> UIAlertAction {
-        return UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil)
+    fileprivate func dismissAction()-> UIAlertAction {
+        return UIAlertAction(title: "Dismiss", style: .default, handler: nil)
     }
 
 }
