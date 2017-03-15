@@ -17,10 +17,10 @@ This is a simple voice changing app that will slow, speed up your voice, make yo
    Click stop when done with your message.  
    Click the snail to play your voice slowly.  
    Click the rabbit to play your voice quickly.  
-   Click the chipmunk to make your voice sound like a chipmunk.
-   Click the helmet to make your voice sound like Darth Vader.
-   Click stop to stop playing.
-   Click Record to return to recording a new voice file.
+   Click the chipmunk to make your voice sound like a chipmunk.  
+   Click the helmet to make your voice sound like Darth Vader.  
+   Click stop to stop playing.  
+   Click Record to return to recording a new voice file.  
 
 ## How to set up the dev environment
   
